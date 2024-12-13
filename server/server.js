@@ -9,13 +9,15 @@ app.use(cors());
 app.use(express.json()); 
 const PORT = process.env.PORT || 3000;
 
-const db = new sqlite3.Database('./albums.db', (err) => {
-    if (err) {
-      console.error(err.message);
-    }
-    console.log('Connected to the SQLite database.');
-  });
-
+const path = require('path');
+const dbPath = path.join(__dirname, 'albums.db');
+const db = new sqlite3.Database(dbPath, (err) => {
+  if (err) {
+    console.error('Error connecting to database:', err.message);
+  } else {
+    console.log('Connected to SQLite database.');
+  }
+});
   // Function to get Spotify access token using client ID and client secret
 async function getSpotifyAccessToken() {
     const clientId = process.env.SPOTIFY_CLIENT_ID;
