@@ -37,6 +37,18 @@ async function getSpotifyAccessToken() {
     }
 }
 
+
+app.get('/debug-tables', (req, res) => {
+    db.all("SELECT name FROM sqlite_master WHERE type='table';", [], (err, tables) => {
+      if (err) {
+        res.status(500).send({ error: err.message });
+      } else {
+        res.send(tables);
+      }
+    });
+  });
+
+  
 app.get('/api/album', async (req, res) => {
   const albumId = req.query.id;
 
