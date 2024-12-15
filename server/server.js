@@ -9,6 +9,20 @@ app.use(cors());
 app.use(express.json()); 
 const PORT = process.env.PORT || 3000;
 
+
+const allowedOrigins = ['https://ill-wind-uazh.vercel.app'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
+
+
 const path = require('path');
 const dbPath = path.join(__dirname, 'albums.db');
 const db = new sqlite3.Database(dbPath, (err) => {
