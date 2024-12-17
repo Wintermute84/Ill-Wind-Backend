@@ -10,7 +10,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
 
-const allowedOrigins = ['https://ill-wind-uazh.vercel.app/'];
+const allowedOrigins = ['https://ill-wind-uazh.vercel.app'];
 
 app.use(cors({
   origin: (origin, callback) => {
