@@ -64,6 +64,9 @@ app.get('/debug-tables', (req, res) => {
     });
   });
 
+app.get('/ping', (req, res) => {
+  res.json({ status: 'ok' });
+});
   
 app.get('/api/album', async (req, res) => {
   const albumId = req.query.id;
